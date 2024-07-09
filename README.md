@@ -38,3 +38,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Create .env file
+
+Create a .env file in the root directory of the project and add the following:
+
+```
+DISCORD_CLIENT_ID=your_discord_app_client_id
+```
+
+The client id can be found in the discord developer portal. [Here](https://discord.com/developers/applications) is the link.
