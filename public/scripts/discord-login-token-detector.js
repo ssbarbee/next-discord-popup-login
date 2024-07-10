@@ -1,16 +1,16 @@
 window.addEventListener('message', (event) => {
-    var code = new URLSearchParams(window.location.search).get('code');
-    if (code) {
+    // Remove the leading #
+    var params = new URLSearchParams(window.location.hash.substring(1));
+    var token = params.get('access_token');
+    if (token) {
         event.source.postMessage(
             {
-                code: code,
+                token: token,
             },
             event.origin,
         );
     } else {
-        var error =
-            new URLSearchParams(window.location.search).get('error_description') ||
-            new URLSearchParams(window.location.search).get('error');
+        var error = params.get('error_description') || params.get('error');
         if (error) {
             event.source.postMessage(
                 {
