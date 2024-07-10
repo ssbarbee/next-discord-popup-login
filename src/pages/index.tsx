@@ -6,7 +6,8 @@ const clientId = process.env.DISCORD_CLIENT_ID;
 const redirectUrl = 'http://localhost:3000/discord';
 const scopes = 'identify';
 const Home = () => {
-    const [discordToken, setDiscordToken] = useState('');
+    const [discordCode, setDiscordCode] = useState('');
+    const [discordError, setDiscordError] = useState('');
     const login = () => {
         const params =
             'scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=700,height=800,left=50%,top=50%';
@@ -26,7 +27,15 @@ const Home = () => {
                     window.clearInterval(interval);
                     popup!.close();
 
-                    setDiscordToken(event.data.code);
+                    setDiscordCode(event.data.code);
+                    setDiscordError('');
+                }
+                if (event.data.error) {
+                    window.clearInterval(interval);
+                    popup!.close();
+
+                    setDiscordCode('');
+                    setDiscordError(event.data.error);
                 }
             },
             false,
@@ -40,9 +49,10 @@ const Home = () => {
                 <title>Discord Popup Login</title>
             </Head>
             <div style={{ width: 500, margin: '0 auto', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                {!discordToken && <button style={buttonStyle} onClick={login}>Login with Discord</button>}
-                {discordToken && <button style={buttonStyle} onClick={() => setDiscordToken('')}>Logout</button>}
-                {discordToken && <p style={{ marginTop: 4,fontSize: '1rem', color: 'white' }}>Discord Token: {discordToken}</p>}
+                {!discordCode && <button style={buttonStyle} onClick={login}>Login with Discord</button>}
+                {discordCode && <button style={buttonStyle} onClick={() => setDiscordCode('')}>Logout</button>}
+                {discordCode && <p style={{ marginTop: 4,fontSize: '1rem', color: 'white' }}>Discord Token: {discordCode}</p>}
+                {discordError && <p style={{ marginTop: 4,fontSize: '2rem', color: 'red' }}>Discord Error: {discordError}</p>}
             </div>
         </>
     );
