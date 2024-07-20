@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Script from 'next/script';
 
-const DiscordToken = () => {
+const DiscordLogin = () => {
   return (
     <>
       <Head>
@@ -13,4 +13,4 @@ const DiscordToken = () => {
   );
 };
 
-export default DiscordToken;
+export default DiscordLogin;
